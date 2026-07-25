@@ -4,6 +4,7 @@ import 'package:rick_and_morty_app/rick_and_morty/data/datasource/Character_remo
 import 'package:rick_and_morty_app/rick_and_morty/data/repo/Character_repo.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/repo/base_character_repo.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/usecases/SearchCharacter.dart';
+import 'package:rick_and_morty_app/rick_and_morty/domain/usecases/export_character_excel_usecase.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/usecases/get_character.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/usecases/get_character_details.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/usecases/get_filtered_characters.dart';
@@ -38,6 +39,10 @@ Future<void> servicesLocator() async {
   sl.registerLazySingleton<GetFilteredCharacter>(
     () => GetFilteredCharacter(sl()),
   );
+  //////
+  sl.registerLazySingleton<ExportCharacterExcelUseCase>(
+    () => ExportCharacterExcelUseCase(sl()),
+  );
 
   // Bloc
   sl.registerFactory<CharacterBloc>(
@@ -46,6 +51,7 @@ Future<void> servicesLocator() async {
       sl<GetCharacterDetails>(),
       sl<Searchcharacter>(),
       sl<GetFilteredCharacter>(),
+      sl<ExportCharacterExcelUseCase>(),
     ),
   );
 }

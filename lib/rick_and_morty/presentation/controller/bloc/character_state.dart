@@ -93,3 +93,14 @@ class FilterCharacterError extends CharacterState {
   @override
   List<Object> get props => [message];
 }
+
+/////
+class ExportCharacterLoadingState extends CharacterState {}
+
+class ExportCharacterSuccessState extends CharacterState {}
+
+class ExportCharacterErrorState extends CharacterState {
+  final String message;
+
+  const ExportCharacterErrorState(this.message);
+}

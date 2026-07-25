@@ -9,6 +9,7 @@ class SplachScreen extends StatefulWidget {
 }
 
 class _SplachScreenState extends State<SplachScreen> {
+  @override
   void initState() {
     super.initState();
 

@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/entites/CharacterFilterEntity.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/entites/character_details.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/entites/character_entites.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/usecases/SearchCharacter.dart';
+import 'package:rick_and_morty_app/rick_and_morty/domain/usecases/export_character_excel_usecase.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/usecases/get_character.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/usecases/get_character_details.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/usecases/get_filtered_characters.dart';
@@ -14,6 +16,7 @@ part 'character_event.dart';
 part 'character_state.dart';
 
 class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
+  final ExportCharacterExcelUseCase exportCharacterExcelUseCase;
   final GetFilteredCharacter getFilteredCharacter;
   final GetCharacter getCharacter;
   final GetCharacterDetails getCharacterDetails;
@@ -24,11 +27,31 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
     this.getCharacterDetails,
     this.searchcharacter,
     this.getFilteredCharacter,
+    this.exportCharacterExcelUseCase,
   ) : super(CharacterInitial()) {
     on<GetCharacterEvent>(_getCharacter);
     on<GetCharacterDetailsEvent>(_getCharacterDetails);
     on<SearchCharacterByNameEvent>(_searchCharacter);
     on<FilterCharactersEvent>(_filterCharacters);
+
+    on<ExportCharacterEvent>((event, emit) async {
+      emit(ExportCharacterLoadingState());
+
+      try {
+        print("Step 1");
+
+        await exportCharacterExcelUseCase(event.character);
+
+        print("Step 2");
+
+        emit(ExportCharacterSuccessState());
+      } catch (e, s) {
+        print(e);
+        print(s);
+
+        emit(ExportCharacterErrorState(e.toString()));
+      }
+    });
   }
 
   Future<void> _getCharacter(

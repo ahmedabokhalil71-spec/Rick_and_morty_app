@@ -88,8 +88,36 @@ class DetailsScreen extends StatelessWidget {
 
                             const SizedBox(height: 40),
 
-                            ConstantElevetadbuttom(onPressed: () {}),
+                            BlocConsumer<CharacterBloc, CharacterState>(
+                              listener: (context, state) {
+                                if (state is ExportCharacterSuccessState) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        "Excel exported successfully",
+                                      ),
+                                    ),
+                                  );
+                                }
 
+                                if (state is ExportCharacterErrorState) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text(state.message)),
+                                  );
+                                }
+                              },
+                              builder: (context, state) {
+                                return ConstantElevetadbuttom(
+                                  isLoading:
+                                      state is ExportCharacterLoadingState,
+                                  onPressed: () {
+                                    context.read<CharacterBloc>().add(
+                                      ExportCharacterEvent(character),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
                             const SizedBox(height: 30),
 
                             const Center(

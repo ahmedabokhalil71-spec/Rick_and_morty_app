@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ConstantElevetadbuttom extends StatelessWidget {
-  const ConstantElevetadbuttom({super.key, required this.onPressed});
+  const ConstantElevetadbuttom({
+    super.key,
+    required this.onPressed,
+    this.isLoading = false,
+  });
 
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -14,18 +19,27 @@ class ConstantElevetadbuttom extends StatelessWidget {
         minimumSize: const Size(double.infinity, 50),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
-      onPressed: onPressed,
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.download),
-          SizedBox(width: 8),
-          Text(
-            "EXPORT CHARACTER DATA",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
+      onPressed: isLoading ? null : onPressed,
+      child: isLoading
+          ? const SizedBox(
+              width: 22,
+              height: 22,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: Colors.black,
+              ),
+            )
+          : const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.download),
+                SizedBox(width: 8),
+                Text(
+                  "EXPORT CHARACTER DATA",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
     );
   }
 }

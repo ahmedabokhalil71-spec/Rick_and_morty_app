@@ -11,4 +11,5 @@ abstract class BaseCharacterRepo {
   Future<Either<Failure, List<CharacterEntity>>> getFilteredCharacters(
     CharacterFilterEntity filter,
   );
+  Future<void> exportCharacter(CharacterDetails character);
 }

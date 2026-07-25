@@ -36,3 +36,10 @@ class FilterCharactersEvent extends CharacterEvent {
 
   const FilterCharactersEvent(this.filter);
 }
+
+///////
+class ExportCharacterEvent extends CharacterEvent {
+  final CharacterDetails character;
+
+  ExportCharacterEvent(this.character);
+}

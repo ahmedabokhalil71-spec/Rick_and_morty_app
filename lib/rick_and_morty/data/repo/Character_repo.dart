@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:rick_and_morty_app/core/errors/excpation.dart';
 import 'package:rick_and_morty_app/core/errors/failure.dart';
 import 'package:rick_and_morty_app/rick_and_morty/data/datasource/Character_remote_datasourses.dart';
+import 'package:rick_and_morty_app/rick_and_morty/data/models/charater_model.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/entites/CharacterFilterEntity.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/entites/character_details.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/entites/character_entites.dart';
@@ -62,5 +63,12 @@ class CharacterRepo extends BaseCharacterRepo {
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }
+  }
+
+  @override
+  Future<void> exportCharacter(CharacterDetails character) {
+    return baseCharacterRemoteDatasourses.exportCharacter(
+      CharacterModel.fromDetails(character),
+    );
   }
 }

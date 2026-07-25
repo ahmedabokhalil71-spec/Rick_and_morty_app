@@ -1,6 +1,8 @@
 // ignore_for_file: file_names
-
+import 'dart:typed_data';
 import 'package:dio/dio.dart';
+import 'package:excel/excel.dart';
+import 'package:flutter_file_dialog/flutter_file_dialog.dart';
 import 'package:rick_and_morty_app/core/errors/excpation.dart';
 import 'package:rick_and_morty_app/core/netWork/api_constance.dart';
 import 'package:rick_and_morty_app/core/netWork/error_massege_model.dart';
@@ -15,6 +17,8 @@ abstract class BaseCharacterRemoteDatasourses {
   Future<List<CharacterModel>> getFilteredCharacters(
     CharacterFilterEntity filter,
   );
+
+  Future<void> exportCharacter(CharacterModel character);
 }
 
 class CharacterRemoteDatasourses extends BaseCharacterRemoteDatasourses {
@@ -95,6 +99,41 @@ class CharacterRemoteDatasourses extends BaseCharacterRemoteDatasourses {
     } else {
       throw SereverExcpation(
         errorMassegeModel: ErrorMessageModel.fromJson(response.data),
+      );
+    }
+  }
+
+  @override
+  Future<void> exportCharacter(CharacterModel character) async {
+    final excel = Excel.createExcel();
+    final Sheet sheet = excel['Character'];
+
+    sheet.appendRow([TextCellValue('Name'), TextCellValue(character.name)]);
+
+    sheet.appendRow([TextCellValue('Status'), TextCellValue(character.status)]);
+
+    sheet.appendRow([
+      TextCellValue('Species'),
+      TextCellValue(character.species),
+    ]);
+
+    sheet.appendRow([TextCellValue('Gender'), TextCellValue(character.gender)]);
+
+    sheet.appendRow([
+      TextCellValue('Origin'),
+      TextCellValue(character.origin.name),
+    ]);
+
+    sheet.appendRow([TextCellValue('Image'), TextCellValue(character.image)]);
+
+    final bytes = excel.encode();
+
+    if (bytes != null) {
+      await FlutterFileDialog.saveFile(
+        params: SaveFileDialogParams(
+          data: Uint8List.fromList(bytes),
+          fileName: '${character.name.replaceAll(" ", "_")}.xlsx',
+        ),
       );
     }
   }

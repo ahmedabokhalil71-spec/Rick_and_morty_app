@@ -1,4 +1,5 @@
 import 'package:rick_and_morty_app/rick_and_morty/data/models/OriginModel.dart';
+import 'package:rick_and_morty_app/rick_and_morty/domain/entites/character_details.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/entites/character_entites.dart';
 
 class CharacterModel extends CharacterEntity {
@@ -11,6 +12,29 @@ class CharacterModel extends CharacterEntity {
     required super.image,
     required super.origin,
   });
+  factory CharacterModel.fromDetails(CharacterDetails details) {
+    return CharacterModel(
+      id: details.id,
+      name: details.name,
+      status: details.status,
+      species: details.species,
+      gender: details.gender,
+      image: details.image,
+      origin: details.origin as OriginModel,
+    );
+  }
+
+  factory CharacterModel.fromEntity(CharacterEntity entity) {
+    return CharacterModel(
+      id: entity.id,
+      name: entity.name,
+      status: entity.status,
+      species: entity.species,
+      gender: entity.gender,
+      image: entity.image,
+      origin: entity.origin as OriginModel,
+    );
+  }
 
   factory CharacterModel.fromJson(Map<String, dynamic> json) {
     return CharacterModel(
