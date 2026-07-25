@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:rick_and_morty_app/rick_and_morty/domain/entites/SearchCharacterEntity.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/entites/character_details.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/entites/character_entites.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/usecases/SearchCharacter.dart';
