@@ -8,7 +8,9 @@ import 'package:rick_and_morty_app/rick_and_morty/presentation/controller/bloc/c
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
+
   final TextEditingController searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -18,29 +20,25 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: Colors.black,
           elevation: 4,
           shadowColor: Colors.white.withValues(alpha: 0.15),
-
           leading: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Image.asset("assets/images/logo leading.png"),
           ),
-
           title: const Text(
             "Portal Explorer",
             style: TextStyle(color: Color(0XFFB2EB65)),
           ),
-
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 16),
               child: Image.asset("assets/images/Icon.png"),
             ),
           ],
-
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1),
             child: Container(
               height: 1,
-              color: Colors.white.withValues(alpha: 0.2), // الخط اللي تحت
+              color: Colors.white.withValues(alpha: 0.2),
             ),
           ),
         ),
@@ -48,15 +46,33 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              SizedBox(height: 20),
-              ComponentTextFaild(
-                controller: searchController,
-                hintText: 'Search characters...',
-                prefixIcon: const Icon(Icons.search, color: Colors.grey),
+              const SizedBox(height: 20),
+
+              Builder(
+                builder: (context) {
+                  return ComponentTextFaild(
+                    controller: searchController,
+                    hintText: 'Search characters...',
+                    prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                    onChanged: (value) {
+                      if (value.trim().isEmpty) {
+                        context.read<CharacterBloc>().add(GetCharacterEvent());
+                      } else {
+                        context.read<CharacterBloc>().add(
+                          SearchCharacterByNameEvent(value),
+                        );
+                      }
+                    },
+                  );
+                },
               ),
-              SizedBox(height: 20),
-              ComponentFilter(),
-              SizedBox(height: 20),
+
+              const SizedBox(height: 20),
+
+              const ComponentFilter(),
+
+              const SizedBox(height: 20),
+
               ComponentCharacters(),
             ],
           ),

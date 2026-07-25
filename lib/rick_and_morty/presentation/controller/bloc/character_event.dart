@@ -19,3 +19,13 @@ class GetCharacterDetailsEvent extends CharacterEvent {
   @override
   List<Object> get props => [id];
 }
+
+// SearchCharacter
+class SearchCharacterByNameEvent extends CharacterEvent {
+  final String name;
+
+  const SearchCharacterByNameEvent(this.name);
+
+  @override
+  List<Object> get props => [name];
+}

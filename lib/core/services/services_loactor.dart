@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:rick_and_morty_app/rick_and_morty/data/datasource/Character_remote_datasourses.dart';
 import 'package:rick_and_morty_app/rick_and_morty/data/repo/Character_repo.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/repo/base_character_repo.dart';
+import 'package:rick_and_morty_app/rick_and_morty/domain/usecases/SearchCharacter.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/usecases/get_character.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/usecases/get_character_details.dart';
 import 'package:rick_and_morty_app/rick_and_morty/presentation/controller/bloc/character_bloc.dart';
@@ -29,9 +30,14 @@ Future<void> servicesLocator() async {
   sl.registerLazySingleton<GetCharacterDetails>(
     () => GetCharacterDetails(sl()),
   );
+  sl.registerLazySingleton<Searchcharacter>(() => Searchcharacter(sl()));
 
   // Bloc
   sl.registerFactory<CharacterBloc>(
-    () => CharacterBloc(sl<GetCharacter>(), sl<GetCharacterDetails>()),
+    () => CharacterBloc(
+      sl<GetCharacter>(),
+      sl<GetCharacterDetails>(),
+      sl<Searchcharacter>(),
+    ),
   );
 }

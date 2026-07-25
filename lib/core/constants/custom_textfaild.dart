@@ -7,16 +7,18 @@ class ComponentTextFaild extends StatelessWidget {
     required this.hintText,
     this.validator,
     this.prefixIcon,
+    this.onChanged,
   });
 
   final TextEditingController controller;
   final String hintText;
   final String? Function(String?)? validator;
   final Widget? prefixIcon;
-
+  final ValueChanged<String>? onChanged;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
       controller: controller,
       validator: validator,
       decoration: InputDecoration(

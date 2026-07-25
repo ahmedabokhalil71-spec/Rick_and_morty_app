@@ -50,3 +50,24 @@ class GetCharacterDetailsErrorState extends CharacterState {
   @override
   List<Object> get props => [message];
 }
+
+// SearchCharacter
+class SearchCharacterLoading extends CharacterState {}
+
+class SearchCharacterSuccess extends CharacterState {
+  final List<CharacterEntity> characters;
+
+  const SearchCharacterSuccess(this.characters);
+
+  @override
+  List<Object> get props => [characters];
+}
+
+class SearchCharacterError extends CharacterState {
+  final String message;
+
+  const SearchCharacterError(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
