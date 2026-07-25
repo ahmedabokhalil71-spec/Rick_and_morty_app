@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                     hintText: 'Search characters...',
                     prefixIcon: const Icon(Icons.search, color: Colors.grey),
                     onChanged: (value) {
-                      if (value.trim().isEmpty) {
+                      if (value.isEmpty) {
                         context.read<CharacterBloc>().add(GetCharacterEvent());
                       } else {
                         context.read<CharacterBloc>().add(

@@ -29,3 +29,10 @@ class SearchCharacterByNameEvent extends CharacterEvent {
   @override
   List<Object> get props => [name];
 }
+
+// filter
+class FilterCharactersEvent extends CharacterEvent {
+  final CharacterFilterEntity filter;
+
+  const FilterCharactersEvent(this.filter);
+}

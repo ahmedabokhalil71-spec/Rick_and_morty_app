@@ -71,3 +71,25 @@ class SearchCharacterError extends CharacterState {
   @override
   List<Object> get props => [message];
 }
+
+// FilterCharacter
+
+class FilterCharacterLoading extends CharacterState {}
+
+class FilterCharacterSuccess extends CharacterState {
+  final List<CharacterEntity> characters;
+
+  const FilterCharacterSuccess(this.characters);
+
+  @override
+  List<Object> get props => [characters];
+}
+
+class FilterCharacterError extends CharacterState {
+  final String message;
+
+  const FilterCharacterError(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
