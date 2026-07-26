@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ComponentImageDetails extends StatelessWidget {
   const ComponentImageDetails({
@@ -21,8 +22,15 @@ class ComponentImageDetails extends StatelessWidget {
           width: double.infinity,
           height: 400.h,
           fit: BoxFit.cover,
-          placeholder: (context, url) =>
-              const Center(child: CircularProgressIndicator()),
+          placeholder: (context, url) => Shimmer.fromColors(
+            baseColor: Colors.grey.shade800,
+            highlightColor: Colors.grey.shade700,
+            child: Container(
+              width: double.infinity,
+              height: 400.h,
+              color: Colors.white,
+            ),
+          ),
           errorWidget: (context, url, error) => Image.asset(
             "assets/images/character.png",
             width: double.infinity,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rick_and_morty_app/core/constants/CharacterDetailsShimmer.dart';
 import 'package:rick_and_morty_app/core/constants/constant_elevetadbuttom.dart';
 import 'package:rick_and_morty_app/core/services/services_loactor.dart';
 import 'package:rick_and_morty_app/rick_and_morty/presentation/component/component_identity.dart';
@@ -23,7 +24,7 @@ class DetailsScreen extends StatelessWidget {
           body: BlocBuilder<CharacterBloc, CharacterState>(
             builder: (context, state) {
               if (state is GetCharacterDetailsLoadingState) {
-                return const Center(child: CircularProgressIndicator());
+                return CharacterDetailsShimmer();
               }
 
               if (state is GetCharacterDetailsErrorState) {

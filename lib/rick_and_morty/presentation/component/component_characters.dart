@@ -2,8 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:rick_and_morty_app/core/constants/character_shimmer.dart';
 import 'package:rick_and_morty_app/rick_and_morty/presentation/controller/bloc/character_bloc.dart';
 import 'package:rick_and_morty_app/rick_and_morty/presentation/screen/details_screen.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ComponentCharacters extends StatelessWidget {
   const ComponentCharacters({super.key});
@@ -17,7 +19,7 @@ class ComponentCharacters extends StatelessWidget {
           if (state is GetCharacterLoadingState ||
               state is SearchCharacterLoading ||
               state is FilterCharacterLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const CharacterShimmer();
           }
 
           // ErrorState
@@ -106,8 +108,15 @@ class CharacterCardItem extends StatelessWidget {
                       width: double.infinity,
                       height: double.infinity,
                       fit: BoxFit.cover,
-                      placeholder: (context, url) =>
-                          const Center(child: CircularProgressIndicator()),
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: Colors.grey.shade800,
+                        highlightColor: Colors.grey.shade700,
+                        child: Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          color: Colors.white,
+                        ),
+                      ),
                       errorWidget: (context, url, error) => Image.asset(
                         "assets/images/character.png",
                         fit: BoxFit.cover,
