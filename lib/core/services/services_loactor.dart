@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:rick_and_morty_app/rick_and_morty/data/datasource/Character_remote_datasourses.dart';
@@ -9,12 +10,16 @@ import 'package:rick_and_morty_app/rick_and_morty/domain/usecases/get_character.
 import 'package:rick_and_morty_app/rick_and_morty/domain/usecases/get_character_details.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/usecases/get_filtered_characters.dart';
 import 'package:rick_and_morty_app/rick_and_morty/presentation/controller/bloc/character_bloc.dart';
+import 'package:rick_and_morty_app/rick_and_morty/presentation/controller/no_internet_bloc/no_internet_bloc.dart';
 
 final sl = GetIt.instance;
 
 Future<void> servicesLocator() async {
   // Dio
   sl.registerLazySingleton<Dio>(() => Dio());
+
+  // Connectivity
+  sl.registerLazySingleton<Connectivity>(() => Connectivity());
 
   // Remote Data Source
   sl.registerLazySingleton<BaseCharacterRemoteDatasourses>(
@@ -54,4 +59,6 @@ Future<void> servicesLocator() async {
       sl<ExportCharacterExcelUseCase>(),
     ),
   );
+  // bloc internet
+  sl.registerFactory<NoInternetBloc>(() => NoInternetBloc(sl<Connectivity>()));
 }
