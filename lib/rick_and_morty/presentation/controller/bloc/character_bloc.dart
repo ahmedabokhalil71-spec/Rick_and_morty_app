@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/entites/CharacterFilterEntity.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/entites/character_details.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/entites/character_entites.dart';
@@ -33,25 +32,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
     on<GetCharacterDetailsEvent>(_getCharacterDetails);
     on<SearchCharacterByNameEvent>(_searchCharacter);
     on<FilterCharactersEvent>(_filterCharacters);
-
-    on<ExportCharacterEvent>((event, emit) async {
-      emit(ExportCharacterLoadingState());
-
-      try {
-        print("Step 1");
-
-        await exportCharacterExcelUseCase(event.character);
-
-        print("Step 2");
-
-        emit(ExportCharacterSuccessState());
-      } catch (e, s) {
-        print(e);
-        print(s);
-
-        emit(ExportCharacterErrorState(e.toString()));
-      }
-    });
+    on<ExportCharacterEvent>(_exportCharacterEvent);
   }
 
   Future<void> _getCharacter(
@@ -130,5 +111,20 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         emit(FilterCharacterSuccess(characters));
       },
     );
+  }
+
+  FutureOr<void> _exportCharacterEvent(
+    ExportCharacterEvent event,
+    Emitter<CharacterState> emit,
+  ) async {
+    emit(ExportCharacterLoadingState());
+
+    try {
+      await exportCharacterExcelUseCase(event.character);
+
+      emit(ExportCharacterSuccessState());
+    } catch (e, s) {
+      emit(ExportCharacterErrorState(e.toString()));
+    }
   }
 }

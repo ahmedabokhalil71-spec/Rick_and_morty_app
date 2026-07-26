@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty_app/core/constants/constant_elevetadbuttom.dart';
 import 'package:rick_and_morty_app/core/services/services_loactor.dart';
-import 'package:rick_and_morty_app/rick_and_morty/presentation/component/component_IDENTITY.dart';
-import 'package:rick_and_morty_app/rick_and_morty/presentation/component/component_LAST_KNOWN_COORDINATES.dart';
+import 'package:rick_and_morty_app/rick_and_morty/presentation/component/component_identity.dart';
+import 'package:rick_and_morty_app/rick_and_morty/presentation/component/component_last_known_coordinates.dart';
 import 'package:rick_and_morty_app/rick_and_morty/presentation/component/component_Pilot.dart';
-import 'package:rick_and_morty_app/rick_and_morty/presentation/component/component_VITAL_SIGNS.dart';
+import 'package:rick_and_morty_app/rick_and_morty/presentation/component/component_vital_signs.dart';
 import 'package:rick_and_morty_app/rick_and_morty/presentation/component/component_image_details.dart';
 import 'package:rick_and_morty_app/rick_and_morty/presentation/controller/bloc/character_bloc.dart';
 

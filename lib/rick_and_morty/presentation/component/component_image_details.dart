@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ComponentImageDetails extends StatelessWidget {
   const ComponentImageDetails({
@@ -14,24 +16,24 @@ class ComponentImageDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image.network(
-          image,
+        CachedNetworkImage(
+          imageUrl: image,
           width: double.infinity,
-          height: 400,
+          height: 400.h,
           fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) {
-            return Image.asset(
-              "assets/images/character.png",
-              width: double.infinity,
-              height: 400,
-              fit: BoxFit.cover,
-            );
-          },
+          placeholder: (context, url) =>
+              const Center(child: CircularProgressIndicator()),
+          errorWidget: (context, url, error) => Image.asset(
+            "assets/images/character.png",
+            width: double.infinity,
+            height: 400.h,
+            fit: BoxFit.cover,
+          ),
         ),
 
         SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(12),
+            padding: EdgeInsets.all(12.r),
             child: CircleAvatar(
               backgroundColor: Colors.black54,
               child: IconButton(
@@ -45,19 +47,19 @@ class ComponentImageDetails extends StatelessWidget {
         ),
 
         Positioned(
-          left: 0,
-          right: 0,
-          bottom: 0,
+          left: 0.w,
+          right: 0.w,
+          bottom: 0.h,
           child: Container(
-            height: 100,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            height: 100.h,
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
             alignment: Alignment.centerLeft,
             color: Colors.black.withValues(alpha: 0.6),
             child: Text(
               name,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
-                fontSize: 28,
+                fontSize: 28.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),

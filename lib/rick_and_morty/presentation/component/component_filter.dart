@@ -1,34 +1,6 @@
-// import 'package:flutter/material.dart';
-// class ComponentFilter extends StatelessWidget {
-//   const ComponentFilter({super.key});
-//   @override
-//   Widget build(BuildContext context) {
-//     return SingleChildScrollView(
-//       scrollDirection: Axis.horizontal,
-//       child: Row(
-//         children: List.generate(
-//           10,
-//           (index) => Padding(
-//             padding: const EdgeInsets.only(right: 10),
-//             child: Container(
-//               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-//               decoration: BoxDecoration(
-//                 color: Colors.grey.shade800,
-//                 borderRadius: BorderRadius.circular(20),
-//               ),
-//               child: Text(
-//                 "hhhhhhh",
-//                 style: const TextStyle(color: Colors.white),
-//               ),
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rick_and_morty_app/rick_and_morty/domain/entites/CharacterFilterEntity.dart';
 import 'package:rick_and_morty_app/rick_and_morty/presentation/controller/bloc/character_bloc.dart';
 
@@ -47,7 +19,7 @@ class _ComponentFilterState extends State<ComponentFilter> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40,
+      height: 40.h,
 
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -77,22 +49,22 @@ class _ComponentFilterState extends State<ComponentFilter> {
             },
 
             child: Container(
-              margin: const EdgeInsets.only(right: 10),
+              margin: EdgeInsets.only(right: 10.w),
 
-              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 8.h),
 
               decoration: BoxDecoration(
                 color: isSelected ? Colors.green : Colors.grey.shade800,
 
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(20.r),
               ),
 
               child: Center(
                 child: Text(
                   filter,
 
-                  style: const TextStyle(
-                    fontSize: 20,
+                  style: TextStyle(
+                    fontSize: 20.sp,
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
                   ),

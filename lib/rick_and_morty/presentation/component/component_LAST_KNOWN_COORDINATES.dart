@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ComponentLastKnownCoordinates extends StatelessWidget {
   final String location;
@@ -10,43 +11,43 @@ class ComponentLastKnownCoordinates extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: const Color(0XFF282A2B),
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: Colors.white, width: .2),
+        borderRadius: BorderRadius.circular(15.r),
+        border: Border.all(color: Colors.white, width: .2.w),
       ),
       width: double.infinity,
-      height: 120,
+      height: 120.h,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
+        padding: EdgeInsets.symmetric(horizontal: 25.w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Align(
+            Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 "LAST KNOWN COORDINATES",
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
               ),
             ),
 
-            const SizedBox(height: 10),
+            SizedBox(height: 10.h),
 
-            const Align(
+            Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 "Current Location",
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
               ),
             ),
 
-            const SizedBox(height: 15),
+            SizedBox(height: 15.h),
 
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 location,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Color(0xFFB2EB65),
-                  fontSize: 20,
+                  fontSize: 20.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
