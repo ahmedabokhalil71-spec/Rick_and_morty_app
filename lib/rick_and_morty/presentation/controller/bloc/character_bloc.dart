@@ -113,7 +113,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
     );
   }
 
-  FutureOr<void> _exportCharacterEvent(
+  Future<void> _exportCharacterEvent(
     ExportCharacterEvent event,
     Emitter<CharacterState> emit,
   ) async {
